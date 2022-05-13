@@ -17,14 +17,13 @@ public class PaymentManager {
    * The user can choose an available payment method. After the payment has occured, the order is added to the "OrderQueue"
    * @param order
    */
-  public static void moveToPayment(Order order) {
+  public static boolean askForPayment(Order order) {
     IPayment method = letUserChoosePaymentMethod();
     double payment = order.getFinalPrice();
 
     //TODO: waitUntil(method.paymentSucceded(payment));
 
-    order.orderState = OrderState.AwaitingPreparation;
-    OrderQueue.addOrder(order);
+    return true;
   }
 
   /**

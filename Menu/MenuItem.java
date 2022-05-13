@@ -9,20 +9,22 @@ import Menu.Ingredient.Allergen;
  * Francisco Javier Camacho Perez de Sevilla i6281035
  * Stan Ostaszewski i6268633
  */
-public class MenuItem {
+public class MenuItem implements Cloneable {
   public MenuItem(String name, MenuCategory menuCategory) {
     this.name = name;
     this.category = menuCategory;
     recalculatePrice();
     recalculateAllergens();
+    recalculateIsInStock();
   }
-
+  
   public MenuItem(String name, MenuCategory menuCategory, ArrayList<Dish> dishes) {
     this.name = name;
     this.category = menuCategory;
     this.dishes.addAll(dishes);
     recalculatePrice();
     recalculateAllergens();
+    recalculateIsInStock();
   }
 
   /**

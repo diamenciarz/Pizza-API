@@ -1,5 +1,7 @@
 package ExampleInstances;
 
+import Delivering.Deliverer;
+import Delivering.DeliveryDeployer;
 import Menu.*;
 import Menu.DiscountConditions.*;
 import Menu.DiscountOutcomes.*;
@@ -48,6 +50,9 @@ public class Examples {
     // Adding the discount to summerMenu
     summerMenu.addDiscount(discountHalfPrice);
     MenuManager.addMenu(summerMenu);
+
+    //Create a deliverer who can deliver orders
+    DeliveryDeployer.addAvailableDeliverer(new Deliverer(3));
 
     // Let's say that a client ordered something through the UberEats app
     OrdererAPI appOrderer = new OrdererAPI(summerMenu);

@@ -19,6 +19,7 @@ public class Dish implements Cloneable {
     this.name = name;
     this.ingredients = ingredients;
     recalculateAllergens();
+    recalculateIsInStock();
   }
 
   public String name;

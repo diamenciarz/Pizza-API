@@ -48,7 +48,7 @@ public class Order implements Cloneable {
    * The current state of this order. It will be updated throughout the process.
    * It is used by online apps to display the information to the user.
    */
-  public OrderState orderState;
+  private OrderState orderState;
 
   /**
    * Returns the total price of the order with discounts applied
@@ -77,6 +77,11 @@ public class Order implements Cloneable {
   public Order addMenuItemToOrder(MenuItem menuItem) {
     orderedItems.add(menuItem);
     return this;
+  }
+
+  public void setOrderState(OrderState state){
+    orderState = state;
+    System.out.println("Set new state: " + state.toString());
   }
 
   @Override

@@ -1,8 +1,9 @@
 package Ordering;
 
 import Menu.*;
-import java.util.ArrayList;
+import Ordering.Payment.PaymentManager;
 
+import java.util.ArrayList;
 /**
  * Group 1
   Francisco Javier Camacho Perez de Sevilla i6281035
@@ -33,15 +34,15 @@ public abstract class Orderer {
 
   public Orderer addItemToOrder(MenuItem item) {
     if (item.isInStock) {
-      OrderManager.addItemToOrder(item, orderToEdit);
-    }else{
+      orderToEdit.orderedItems.add(item);
+    } else {
       System.out.println("Item not in stock anymore");
     }
     return this;
   }
 
   public Orderer removeItemFromOrder(MenuItem item) {
-    OrderManager.removeItemFromOrder(item, orderToEdit);
+    orderToEdit.orderedItems.remove(item);
     return this;
   }
 
@@ -53,7 +54,11 @@ public abstract class Orderer {
   /**
    * This method is called
    */
-  public void finalizeOrder(){
-    OrderManager.finalizeOrder(orderToEdit);
+  public void finalizeOrder() {
+    Order orderWithDiscountsApplied = DiscountApplier.applyDiscounts(orderToEdit);
+    
+    if (PaymentManager.askForPayment(orderWithDiscountsApplied)) {
+      OrderQueue.addOrder(orderWithDiscountsApplied);
+    }
   }
 }

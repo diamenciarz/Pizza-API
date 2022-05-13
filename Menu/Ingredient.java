@@ -12,6 +12,7 @@ public class Ingredient {
   public Ingredient(String name, double cost) {
     this.name = name;
     this.cost = cost;
+    isInStock = true;
   }
 
   public double cost;

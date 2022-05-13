@@ -44,6 +44,9 @@ public class MenuManager {
     for (MenuItem menuItem : menu.menuItems) {
       addMenuItem(menuItem);
     }
+    if (currentMenu == null) {
+      currentMenu = menu;
+    }
   }
 
   public static void addMenuItem(MenuItem menuItem) {

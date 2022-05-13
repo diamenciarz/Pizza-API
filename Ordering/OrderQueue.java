@@ -17,8 +17,13 @@ public class OrderQueue {
   public static ArrayList<Order> orders;
 
   public static void addOrder(Order order) {
+    order.setOrderState(OrderState.AwaitingPreparation);
     orders.add(order);
+    // Some time passes
+    orderPrepared(order);
   }
+
+  
 
   /**
    * Takes the prepared order from the queue and:
@@ -28,9 +33,11 @@ public class OrderQueue {
    */
   public static void orderPrepared(Order order) {
     orders.remove(order);
-    order.orderState = OrderState.AwaitingDelivery;
+    order.setOrderState(OrderState.AwaitingDelivery);
     if (order.deliveryMethod == DeliveryMethod.DeliverToAddress) {
       DeliveryDeployer.ordersToDeliver.add(order);
     }
+    DeliveryDeployer.ordersToDeliver.add(order);
+    DeliveryDeployer.checkForDeliveries();
   }
 }

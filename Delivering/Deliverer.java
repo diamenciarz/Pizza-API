@@ -11,24 +11,57 @@ import Ordering.Order.OrderState;
 import java.util.ArrayList;
 
 public class Deliverer {
+  public Deliverer(int cargoSize) {
+    CARGO_SIZE = cargoSize;
+    cargoState = 0;
+  }
+
   /**
    * A list of orders that are being stored by this deliverer.
    * The delivery person could be taking more than one order at once.
    * Every order has a specified address of delivery
    */
-  public static ArrayList<Order> ordersInCargo = new ArrayList<>();
+  public ArrayList<Order> ordersInCargo = new ArrayList<>();
+  public final int CARGO_SIZE;
+  public int cargoState;
 
   /**
-   * The deliverer calls for more orders to deliver after they have arrived back at the restaurant
+   * The deliverer calls for more orders to deliver after they have arrived back
+   * at the restaurant
    */
-  public static void checkInForNewOrders() {}
+  public void checkInForNewOrders() {
+    DeliveryDeployer.addAvailableDeliverer(this);
+  }
+
+  public void addOrder(Order order) {
+    ordersInCargo.add(order);
+    cargoState++;
+  }
+
+  public void orderDelivered(Order order) {
+    ordersInCargo.remove(order);
+    cargoState--;
+  }
 
   /**
-   * This is called when an order is put into the cargo of a deliverer. The state of the order is then updated
+   * This is called when an order is put into the cargo of a deliverer. The state
+   * of the order is then updated
    */
-  public static void OnCargoFilled() {
+  public void deploy() {
+    updateOrderState();
+    deliverOrders();
+    checkInForNewOrders();
+  }
+
+  private void updateOrderState() {
     for (Order order : ordersInCargo) {
-      order.orderState = OrderState.Delivering;
+      order.setOrderState(OrderState.Delivering);
+    }
+  }
+
+  private void deliverOrders() {
+    for (Order order : ordersInCargo) {
+      orderDelivered(order);
     }
   }
 }
