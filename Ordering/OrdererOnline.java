@@ -14,9 +14,14 @@ public class OrdererOnline extends Orderer {
    * Each way of making an order can have some limitations.
    * These rules should be specified in each of the "Orderer" extensions
    */
-  public OrdererOnline(Menu menu) {
+  public OrdererOnline(Menu menu, int takeawayNR) {
     super(menu);
     setDeliveryMethod();
+    setTakeawayNr(takeawayNR);
+  }
+
+  public void setTakeawayNr(int takeawayNR) {
+    orderToEdit.takeawayNR = takeawayNR;
   }
 
   /**
@@ -25,7 +30,7 @@ public class OrdererOnline extends Orderer {
    */
   @Override
   public Orderer setDeliveryMethod() {
-    orderToEdit.deliveryMethod = DeliveryMethod.DeliverToAddress;
+    orderToEdit.deliveryMethod = DeliveryMethod.Takeaway;
     return this;
   }
 }

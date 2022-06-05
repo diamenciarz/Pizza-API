@@ -16,6 +16,10 @@ public class Menu implements Cloneable {
   // region Mutator methods
   public Menu addMenuItem(MenuItem menuItem) {
     menuItems.add(menuItem);
+    System.out.println("Added menu item: " + menuItem.name);
+    if (dishOfTheDay == null) {
+      dishOfTheDay = menuItem;
+    }
     return this;
   }
 
@@ -32,6 +36,9 @@ public class Menu implements Cloneable {
   public Menu removeDiscount(Discount discount) {
     activeDiscounts.remove(discount);
     return this;
+  }
+  public void setDishOfTheDay(MenuItem menuItem){
+    dishOfTheDay = menuItem;
   }
   // endregion
 

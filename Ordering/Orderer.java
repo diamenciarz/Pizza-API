@@ -1,9 +1,11 @@
 package Ordering;
 
 import Menu.*;
+import Ordering.Order.DeliveryMethod;
 import Ordering.Payment.PaymentManager;
 
 import java.util.ArrayList;
+
 /**
  * Group 1
   Francisco Javier Camacho Perez de Sevilla i6281035
@@ -35,6 +37,7 @@ public abstract class Orderer {
   public Orderer addItemToOrder(MenuItem item) {
     if (item.isInStock) {
       orderToEdit.orderedItems.add(item);
+      System.out.println("Added item to order: " + item.name);
     } else {
       System.out.println("Item not in stock anymore");
     }
@@ -55,10 +58,29 @@ public abstract class Orderer {
    * This method is called
    */
   public void finalizeOrder() {
+    checkIfDataSufficient(orderToEdit);
     Order orderWithDiscountsApplied = DiscountApplier.applyDiscounts(orderToEdit);
-    
+
     if (PaymentManager.askForPayment(orderWithDiscountsApplied)) {
       OrderQueue.addOrder(orderWithDiscountsApplied);
+    }
+  }
+
+  private void checkIfDataSufficient(Order order) {
+    if (order.deliveryMethod == DeliveryMethod.DeliverToAddress) {
+      if (order.deliveryAddress == null) {
+        throw new NullPointerException("Delivery address was null");
+      }
+    }
+    if (order.deliveryMethod == DeliveryMethod.OnSite) {
+      if (order.tableNR == 0) {
+        throw new NullPointerException("Table number was unassigned");
+      }
+    }
+    if (order.deliveryMethod == DeliveryMethod.Takeaway) {
+      if (order.takeawayNR == 0) {
+        throw new NullPointerException("Takeaway number was unassigned");
+      }
     }
   }
 }

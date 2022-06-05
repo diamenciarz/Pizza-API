@@ -17,7 +17,7 @@ import Ordering.MenuManager;
 public class ClosedAPI {
 
   // region Modify Ingredient
-  public ClosedAPI setIngredientInStock(Ingredient ingredient) {
+public ClosedAPI setIngredientInStock(Ingredient ingredient) {
     ingredient.isInStock = true;
     recalculateAllStock();
     return this;

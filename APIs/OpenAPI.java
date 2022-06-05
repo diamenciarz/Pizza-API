@@ -20,7 +20,7 @@ public abstract class OpenAPI {
   
   public OpenAPI(Order order) {
     this.order = order;
-  }
+}
   
   Order order;
 

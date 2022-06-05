@@ -14,7 +14,7 @@ public class OrderQueue {
   /**
    * The queue of orders that need to be prepared in the kitchen
    */
-  public static ArrayList<Order> orders;
+  public static ArrayList<Order> orders = new ArrayList<>();
 
   public static void addOrder(Order order) {
     order.setOrderState(OrderState.AwaitingPreparation);

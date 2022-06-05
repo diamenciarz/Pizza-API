@@ -23,7 +23,7 @@ public class Examples {
     Ingredient ingredientTomatoes = new Ingredient("Tomatos", 1.4);
     Ingredient ingredientOnions = new Ingredient("Onions", 3.7).addAllergen(Allergen.ONION);
     Ingredient ingredientPasta = new Ingredient("Pasta", 0.5).addAllergen(Allergen.CORIANDER);
-    Ingredient ingredientCoke = new Ingredient("Coke", 50).addAllergen(Allergen.DEATH);
+    Ingredient ingredientCoke = new Ingredient("Coke", 50).addAllergen(Allergen.DEATH).addAllergen(Allergen.LACTOSE);
 
     // Defining dishes which are a combination of ingredient sets
     Dish pastaWithOlives = new Dish("Pasta With Olives")
@@ -51,11 +51,12 @@ public class Examples {
     summerMenu.addDiscount(discountHalfPrice);
     MenuManager.addMenu(summerMenu);
 
-    //Create a deliverer who can deliver orders
+    // Create a deliverer who can deliver orders
     DeliveryDeployer.addAvailableDeliverer(new Deliverer(3));
 
     // Let's say that a client ordered something through the UberEats app
-    OrdererAPI appOrderer = new OrdererAPI(summerMenu);
+    String address = "Square 11/33";
+    OrdererAPI appOrderer = new OrdererAPI(summerMenu, address);
 
     // They add 2 items to their order
     appOrderer.addItemToOrder(summerMenu.getAvailableMenuItems().get(0));

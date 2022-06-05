@@ -60,7 +60,8 @@ public class Deliverer {
   }
 
   private void deliverOrders() {
-    for (Order order : ordersInCargo) {
+    for (int i = ordersInCargo.size() - 1; i >= 0; i--) {
+      Order order = ordersInCargo.get(i);
       orderDelivered(order);
     }
   }

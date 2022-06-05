@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class Order implements Cloneable {
 
-  public Order(Menu menu){
+  public Order(Menu menu) {
     savedMenu = menu;
   }
 
@@ -79,7 +79,7 @@ public class Order implements Cloneable {
     return this;
   }
 
-  public void setOrderState(OrderState state){
+  public void setOrderState(OrderState state) {
     orderState = state;
     System.out.println("Set new state: " + state.toString());
   }

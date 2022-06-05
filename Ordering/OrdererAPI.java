@@ -15,9 +15,14 @@ public class OrdererAPI extends Orderer {
    * These rules should be specified in each of the "Orderer" extensions
    * This is a list
    */
-  public OrdererAPI(Menu menu) {
+  public OrdererAPI(Menu menu, String address) {
     super(menu);
     setDeliveryMethod();
+    setDeliveryAddress(address);
+  }
+
+  public void setDeliveryAddress(String address) {
+    orderToEdit.deliveryAddress = address;
   }
 
   /**
